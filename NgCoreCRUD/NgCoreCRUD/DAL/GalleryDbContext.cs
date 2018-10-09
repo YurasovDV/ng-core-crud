@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using NgCoreCRUD.DAL.Configurations;
+using NgCoreCRUD.Model;
 
 namespace NgCoreCRUD.DAL
 {
@@ -13,6 +14,10 @@ namespace NgCoreCRUD.DAL
         {
             
         }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<GalleryItem> Pictures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
