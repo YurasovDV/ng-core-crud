@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/GalleryApi",
+      //"launchUrl": "api/GalleryApi",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "NgCoreCRUD": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/GalleryApi",
+      //"launchUrl": "api/GalleryApi",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
