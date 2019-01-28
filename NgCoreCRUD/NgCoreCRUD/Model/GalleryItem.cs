@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace NgCoreCRUD.Model
 {
@@ -11,11 +8,13 @@ namespace NgCoreCRUD.Model
 
         public byte[] Image { get; set; }
 
+        [MaxLength(140, ErrorMessage = "Description must be 140 symbols or less")]
         public string Description { get; set; }
 
+
+
         public Category Category { get; set; }
-
-
+        
         public int CategoryId { get; set; }
     }
 }

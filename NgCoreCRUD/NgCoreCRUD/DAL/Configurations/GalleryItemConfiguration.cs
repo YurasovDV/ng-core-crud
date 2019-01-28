@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NgCoreCRUD.Model;
 
@@ -14,9 +10,9 @@ namespace NgCoreCRUD.DAL.Configurations
         {
             builder.ToTable("Pictures", Constants.Schema);
 
-            builder.HasKey(g => g.ID);
+            builder.HasKey(pict => pict.ID);
 
-            builder.Property(g => g.Description).HasMaxLength(140);
+            builder.Property(pict => pict.Description).HasMaxLength(140);
         }
     }
 }

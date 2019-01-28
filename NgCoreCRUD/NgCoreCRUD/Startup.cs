@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NgCoreCRUD.DAL;
+using NgCoreCRUD.Model.Services;
 
 namespace NgCoreCRUD
 {
@@ -30,6 +31,7 @@ namespace NgCoreCRUD
 
             services.AddDbContext<GalleryDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("GalleryDB"), options => options.CommandTimeout(120)));
 
+            services.Add(new ServiceDescriptor(typeof(IGalleryService), typeof(GalleryService), ServiceLifetime.Transient));
 
             services.AddSpaStaticFiles(configuration =>
             {

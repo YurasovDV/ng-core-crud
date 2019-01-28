@@ -1,45 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NgCoreCRUD.Model;
+using NgCoreCRUD.Model.Services;
 
 namespace NgCoreCRUD.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/galleryitem")]
     [ApiController]
-    public class GalleryApiController : Controller
+    public class GalleryApiController : BaseController
     {
-        // GET api/GalleryApi
+        public GalleryApiController(GalleryService service) : base(service) { }
+
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IAsyncEnumerable<GalleryItem> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _galleryService.GetAll();
         }
 
-        // GET api/GalleryApi/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<GalleryItem> Get(int id)
         {
-            return "value";
+            GalleryItem result = await _galleryService.GetById(id);
+            return result;
         }
 
-        // POST api/GalleryApi
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async void Post([FromBody] GalleryItem value)
         {
+            await _galleryService.Create(value);
         }
 
-        // PUT api/GalleryApi/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async void Put(int id, [FromBody] GalleryItem value)
         {
+            await _galleryService.Edit(value);
         }
 
-        // DELETE api/GalleryApi/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                await _galleryService.Delete(id);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
         }
     }
 }
