@@ -13,6 +13,8 @@ namespace NgCoreCRUD.DAL.Configurations
             builder.HasKey(pict => pict.ID);
 
             builder.Property(pict => pict.Description).HasMaxLength(140);
+
+            builder.Property(pict => pict.Image).HasColumnType("image");
         }
     }
 }

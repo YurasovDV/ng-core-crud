@@ -15,25 +15,37 @@ namespace NgCoreCRUD.Model.Services
             _context = context;
         }
 
-        public IAsyncEnumerable<GalleryItem> GetAll()
+        public IAsyncEnumerable<GalleryItemDto> GetAll()
         {
-            return _context.Pictures.ToAsyncEnumerable();
+            return _context.Pictures.ToAsyncEnumerable().Select(i => new GalleryItemDto(i));
         }
 
-        public async Task<GalleryItem> GetById(int id)
+        public async Task<GalleryItemDto> GetById(int id)
         {
-            return await _context.Pictures.FindAsync(id);
+            var res = await _context.Pictures.FindAsync(id);
+            return res == null ? null : new GalleryItemDto(res);
         }
 
-        public async Task Create(GalleryItem value)
+        public async Task<int> Create(GalleryItemDto value, byte[] image)
         {
-            await _context.Pictures.AddAsync(value);
+            var picture = new GalleryItem()
+            {
+                CategoryId = value.CategoryId,
+                Description = value.Description,
+                Image = image
+            };
+            await _context.Pictures.AddAsync(picture);
             await _context.SaveChangesAsync();
+            return picture.ID;
         }
 
-        public async Task Edit(GalleryItem value)
+        public async Task Edit(GalleryItemDto value)
         {
-            await Task.Delay(0);
+            var old = await _context.Pictures.FindAsync(value.ID);
+            old.CategoryId = value.CategoryId;
+            old.Description = value.Description;
+            _context.Pictures.Update(old);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> Delete(int id)
@@ -49,6 +61,16 @@ namespace NgCoreCRUD.Model.Services
             {
                 return false;
             }
+        }
+
+        public async Task<byte[]> GetImage(int id)
+        {
+            var pict = await _context.Pictures.FindAsync(id);
+            if (pict != null)
+            {
+                return pict.Image;
+            }
+            return null;
         }
     }
 }
