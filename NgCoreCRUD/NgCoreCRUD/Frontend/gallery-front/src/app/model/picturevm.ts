@@ -1,6 +1,6 @@
 
 export class Picturevm {
 
-  constructor(id: Number, description: string, categoryId: Number) {
+  constructor(public id: Number, public description: string, public categoryId: Number) {
   }
 }

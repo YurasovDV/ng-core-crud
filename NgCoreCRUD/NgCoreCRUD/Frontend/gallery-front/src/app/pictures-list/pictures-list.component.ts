@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PicturesService } from '../services/pictures.service';
 import { Picturevm } from '../model/picturevm';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pictures-list',
@@ -11,10 +12,25 @@ export class PicturesListComponent implements OnInit {
 
   pictures: Picturevm[];
 
-  constructor(private picService: PicturesService) { }
+  @Output() editEvent = new EventEmitter<Number>();
+
+  constructor(private picService: PicturesService, private router: Router) { }
 
   ngOnInit() {
     this.picService.getAll().subscribe(data => this.pictures = data);
+  }
+
+  public editPicture(picture: Picturevm) {
+    this.editEvent.emit(picture.id);
+  }
+
+  public deletePicture(picture: Picturevm) {
+    this.picService.deletePicture(picture.id)
+      .subscribe(data => this.pictures = this.pictures.filter(p => p != picture));
+  }
+
+  public createNew() {
+    this.router.navigate(['createNew']);
   }
 
 }

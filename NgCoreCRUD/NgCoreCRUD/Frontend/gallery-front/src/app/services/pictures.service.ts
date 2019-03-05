@@ -2,20 +2,24 @@ import { Injectable } from '@angular/core';
 import { Picturevm } from '../model/picturevm';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AppConfig } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PicturesService {
-  private apiUrl: string = 'http://localhost:11353/api/v1/galleryitem'
-  constructor(private httpClient: HttpClient) { }
+  private apiUrl: string;
+
+  constructor(private httpClient: HttpClient, private config: AppConfig) {
+    config.get('ApiPath') + '/galleryitem';
+  }
 
   public getAll(): Observable<Picturevm[]> {
     return this.httpClient.get<Picturevm[]>(this.apiUrl);
   }
 
   public getPicture(id: Number): Observable<Picturevm> {
-    return this.httpClient.get<Picturevm[]>(this.apiUrl + '/' + id);
+    return this.httpClient.get<Picturevm>(this.apiUrl + '/' + id);
   }
 
   public create(picturevm: Picturevm) {
