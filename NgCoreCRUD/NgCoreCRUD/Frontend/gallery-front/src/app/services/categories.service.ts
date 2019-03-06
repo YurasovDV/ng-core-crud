@@ -12,7 +12,7 @@ export class CategoriesService {
   private apiUrl: string;
 
   constructor(private httpClient: HttpClient, private config: AppConfig) {
-    config.get('ApiPath') + '/category';
+    this.apiUrl = this.config.get('ApiPath') + '/category';
   }
 
   public getAll(): Observable<Category[]> {
@@ -23,15 +23,15 @@ export class CategoriesService {
     return this.httpClient.get<Category>(this.apiUrl + '/' + id);
   }
 
-  public create(category: Category) {
-    return this.httpClient.post(this.apiUrl, category);
-  }
+  //public create(category: Category) {
+  //  return this.httpClient.post(this.apiUrl, category);
+  //}
 
-  public update(category: Category) {
-    return this.httpClient.put(this.apiUrl, category);
-  }
+  //public update(category: Category) {
+  //  return this.httpClient.put(this.apiUrl, category);
+  //}
 
-  public delete(id: Number) {
-    return this.httpClient.delete(this.apiUrl + '/' + id);
-  }
+  //public delete(id: Number) {
+  //  return this.httpClient.delete(this.apiUrl + '/' + id);
+  //}
 }

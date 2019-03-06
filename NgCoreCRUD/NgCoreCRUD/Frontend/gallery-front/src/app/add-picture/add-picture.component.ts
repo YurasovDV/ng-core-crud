@@ -19,13 +19,13 @@ export class AddPictureComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private picturesService: PicturesService, private categoriesService: CategoriesService, private router: Router) { }
 
   ngOnInit() {
+    this.categoriesService.getAll().subscribe(data => { this.categoriesList = data; });
+
     this.addForm = this.formBuilder.group({
       id: [],
       description: ['', Validators.maxLength(200)],
       categoryId: [0, Validators.min(1)],
     });
-
-    this.categoriesService.getAll().subscribe(data => { this.categoriesList = data; });
 
   }
 
