@@ -26,6 +26,11 @@
   <ItemGroup>
     <None Remove="Frontend\gallery-front\src\app\app.routing.ts" />
     <None Remove="Frontend\gallery-front\src\app\model\category.ts" />
+    <None Remove="Frontend\gallery-front\tsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Frontend\gallery-front\tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>

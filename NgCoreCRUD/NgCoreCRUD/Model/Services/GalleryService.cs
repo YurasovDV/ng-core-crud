@@ -72,5 +72,20 @@ namespace NgCoreCRUD.Model.Services
             }
             return null;
         }
+
+        public IAsyncEnumerable<CategoryDto> GetCategories()
+        {
+            return _context.Categories.ToAsyncEnumerable().Select(c => new CategoryDto() { ID = c.CategoryId, Description = c.Name });
+        }
+
+        public async Task<CategoryDto> GetCategory(int id)
+        {
+            var res = await _context.Categories.FindAsync(id);
+            if (res != null)
+            {
+                return new CategoryDto() { ID = res.CategoryId, Description = res.Name };
+            }
+            return null;
+        }
     }
 }

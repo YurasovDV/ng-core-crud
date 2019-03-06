@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Picturevm } from '../model/picturevm';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { AppConfig } from '../app.config';
 
 @Injectable({
@@ -11,11 +12,20 @@ export class PicturesService {
   private apiUrl: string;
 
   constructor(private httpClient: HttpClient, private config: AppConfig) {
-    config.get('ApiPath') + '/galleryitem';
+    this.apiUrl = this.config.get('ApiPath') + '/galleryitem';
   }
 
   public getAll(): Observable<Picturevm[]> {
-    return this.httpClient.get<Picturevm[]>(this.apiUrl);
+
+    var mapper = map((data: Picturevm[]) => {
+      for (var i = 0; i < data.length; i++) {
+        data[i].url = this.apiUrl + '/GetImage/' + data[i].id;
+      }
+
+      return data;
+    });
+
+    return mapper(this.httpClient.get<Picturevm[]>(this.apiUrl))
   }
 
   public getPicture(id: Number): Observable<Picturevm> {

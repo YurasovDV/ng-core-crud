@@ -10,6 +10,8 @@ import { routing } from './app.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PicturesService } from './services/pictures.service';
+import { CategoriesService } from './services/categories.service';
+import { AppConfig } from './app.config';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,7 @@ import { PicturesService } from './services/pictures.service';
     HttpClientModule,
     routing
   ],
-  providers: [PicturesService],
+  providers: [PicturesService, AppConfig, CategoriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

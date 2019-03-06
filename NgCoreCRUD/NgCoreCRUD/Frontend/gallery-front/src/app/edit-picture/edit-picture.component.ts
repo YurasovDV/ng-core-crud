@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {CategoriesService } from '../services/categories.service'
 import { PicturesService } from '../services/pictures.service';
 import { Category } from '../model/category'
@@ -11,7 +11,7 @@ import { Picturevm } from '../model/picturevm'
 })
 export class EditPictureComponent implements OnInit {
 
-  @Input pictureBeingEditId: Number;
+  @Input() pictureBeingEditId: Number;
 
   constructor() { }
 

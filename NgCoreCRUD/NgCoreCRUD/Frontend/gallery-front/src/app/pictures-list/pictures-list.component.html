@@ -13,7 +13,7 @@
       <tr *ngFor="let pic of pictures">
         <td>{{pic.id}}</td>
         <td>{{pic.Description}}</td>
-        <td>img goes here</td>
+        <td><img src="{{pic.url}}" /></td>
         <td>
           <button class="btn" (click)="editPicture(pic)">Edit</button>
           <button class="btn danger" (click)="deletePicture(pic)">Edit</button>

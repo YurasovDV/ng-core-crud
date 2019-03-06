@@ -61,7 +61,7 @@ namespace NgCoreCRUD.Controllers
             }
         }
 
-        [HttpGet("GetImage{id}")]
+        [HttpGet("GetImage/{id}")]
         public async Task<ActionResult> GetImage(int id)
         {
             var data = await _galleryService.GetImage(id);

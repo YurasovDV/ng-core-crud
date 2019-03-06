@@ -11,6 +11,9 @@ namespace NgCoreCRUD.Model.Services
         IAsyncEnumerable<GalleryItemDto> GetAll();
         Task<GalleryItemDto> GetById(int id);
 
+        IAsyncEnumerable<CategoryDto> GetCategories();
+        Task<CategoryDto> GetCategory(int id);
+
         Task<byte[]> GetImage(int id);
     }
 }
