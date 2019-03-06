@@ -2,6 +2,11 @@
 {
     public class GalleryItemDto
     {
+        public GalleryItemDto()
+        {
+
+        }
+
         public GalleryItemDto(GalleryItem entity)
         {
             if (entity == null)
@@ -14,8 +19,10 @@
             Description = entity.Description;
         }
 
-        public int CategoryId { get; set; }
         public int ID { get; set; }
         public string Description { get; set; }
+
+        public int CategoryId { get; set; }
+        public int CategoryName { get; set; }
     }
 }

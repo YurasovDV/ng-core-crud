@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -27,11 +28,15 @@ namespace NgCoreCRUD
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            Action<InMemoryDbContextOptionsBuilder> c = ax => { };
+            services.AddDbContext<GalleryDbContext>(opt => opt.UseInMemoryDatabase("GalleryDb", c));
+            services.Add(new ServiceDescriptor(typeof(IGalleryService), typeof(GalleryServiceFake), ServiceLifetime.Singleton));
+
+            //services.AddDbContext<GalleryDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("GalleryDB"), options => options.CommandTimeout(120)));
+            //services.Add(new ServiceDescriptor(typeof(IGalleryService), typeof(GalleryService), ServiceLifetime.Scoped));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddDbContext<GalleryDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("GalleryDB"), options => options.CommandTimeout(120)));
-
-            services.Add(new ServiceDescriptor(typeof(IGalleryService), typeof(GalleryService), ServiceLifetime.Transient));
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -52,7 +57,7 @@ namespace NgCoreCRUD
 
             app.UseMvc();
 
-            app.UseSpa(builder => 
+            app.UseSpa(builder =>
             {
                 builder.Options.SourcePath = "Frontend/gallery-front";
 

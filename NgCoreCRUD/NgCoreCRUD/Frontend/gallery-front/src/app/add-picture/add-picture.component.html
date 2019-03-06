@@ -1,8 +1,9 @@
 <div>
+  <h2>Add picture</h2>
   <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
     <div>
-      <input type="text"  id="description" name="description" formControlName="description"/>
-      
+      <input type="text" id="description" name="description" formControlName="description" />
+
       <input type="file" />
       <select>
         <option *ngFor="let category of categoriesList" [value]="category.id">

@@ -1,10 +1,15 @@
-<div class="col-md-6">
-  <button class="btn" (click)="createNew">Add picture</button>
-  <table>
+<div class="col-md-4">
+  <h2>All pictures</h2>
+  <div style="margin: 10px;">
+    <button class="btn btn-success" (click)="createNew()">Add picture</button>
+  </div>
+
+  <table class="table table-striped table-bordered">
     <thead>
       <tr>
         <th>ID</th>
         <th>Description</th>
+        <th>Category</th>
         <th>Preview</th>
         <th></th>
       </tr>
@@ -13,10 +18,11 @@
       <tr *ngFor="let pic of pictures">
         <td>{{pic.id}}</td>
         <td>{{pic.Description}}</td>
-        <td><img src="{{pic.url}}" /></td>
+        <td>{{pic.categoryName}}</td>
+        <td><!--<img src="{{pic.url}}" />--></td>
         <td>
-          <button class="btn" (click)="editPicture(pic)">Edit</button>
-          <button class="btn danger" (click)="deletePicture(pic)">Edit</button>
+          <button class="btn btn-primary" style="margin: 5px;" (click)="editPicture(pic)">Edit</button>
+          <button class="btn btn-danger" style="margin: 5px;"  (click)="deletePicture(pic)">Delete</button>
         </td>
       </tr>
     </tbody>

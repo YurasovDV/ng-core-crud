@@ -15,15 +15,15 @@ namespace NgCoreCRUD.Controllers
         public CategoryController(IGalleryService service) : base(service) { }
 
         [HttpGet]
-        public IAsyncEnumerable<GalleryItemDto> Get()
+        public IAsyncEnumerable<CategoryDto> Get()
         {
-            return _galleryService.GetAll();
+            return _galleryService.GetCategories();
         }
 
         [HttpGet("{id}")]
-        public async Task<GalleryItemDto> Get(int id)
+        public async Task<CategoryDto> Get(int id)
         {
-            var result = await _galleryService.GetById(id);
+            var result = await _galleryService.GetCategory(id);
             return result;
         }
 
