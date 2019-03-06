@@ -23,6 +23,16 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Frontend\gallery-front\src\app\app.routing.ts" />
+    <None Remove="Frontend\gallery-front\src\app\model\category.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Frontend\gallery-front\src\app\app.routing.ts" />
+    <TypeScriptCompile Include="Frontend\gallery-front\src\app\model\category.ts" />
+  </ItemGroup>
+
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />

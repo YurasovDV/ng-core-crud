@@ -1,3 +1,15 @@
-<p>
-  add-picture works!
-</p>
+<div>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+    <div>
+      <input type="text"  id="description" name="description" formControlName="description"/>
+      
+      <input type="file" />
+      <select>
+        <option *ngFor="let category of categoriesList" [value]="category.id">
+          {{category.name}}
+        </option>
+      </select>
+    </div>
+    <button class="btn btn-success">Create</button>
+  </form>
+</div>

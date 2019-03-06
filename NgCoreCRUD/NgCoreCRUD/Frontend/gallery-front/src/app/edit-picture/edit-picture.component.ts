@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {CategoriesService } from '../services/categories.service'
+import { PicturesService } from '../services/pictures.service';
+import { Category } from '../model/category'
+import { Picturevm } from '../model/picturevm'
 
 @Component({
   selector: 'app-edit-picture',
@@ -6,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-picture.component.css']
 })
 export class EditPictureComponent implements OnInit {
+
+  @Input pictureBeingEditId: Number;
 
   constructor() { }
 

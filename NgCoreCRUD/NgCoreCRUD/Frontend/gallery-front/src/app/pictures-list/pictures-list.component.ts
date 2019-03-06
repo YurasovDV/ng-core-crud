@@ -20,8 +20,13 @@ export class PicturesListComponent implements OnInit {
     this.picService.getAll().subscribe(data => this.pictures = data);
   }
 
+  public createNew() {
+    this.router.navigate(['add-picture']);
+  }
+
   public editPicture(picture: Picturevm) {
     this.editEvent.emit(picture.id);
+    this.router.navigate(['edit-picture']);
   }
 
   public deletePicture(picture: Picturevm) {
@@ -29,8 +34,6 @@ export class PicturesListComponent implements OnInit {
       .subscribe(data => this.pictures = this.pictures.filter(p => p != picture));
   }
 
-  public createNew() {
-    this.router.navigate(['createNew']);
-  }
+
 
 }

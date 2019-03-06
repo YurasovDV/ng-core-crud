@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Simple Gallery';
-  private pictureBeingEditId: Number = null;
+  public pictureBeingEditId: Number = null;
 
   public onPictureEditChange($event) {
     this.pictureBeingEditId = $event;

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AddPictureComponent } from './add-picture/add-picture.component';
 import { EditPictureComponent } from './edit-picture/edit-picture.component';
 import { PicturesListComponent } from './pictures-list/pictures-list.component';
+import { routing } from './app.routing';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,7 +21,8 @@ import { PicturesService } from './services/pictures.service';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    routing
   ],
   providers: [PicturesService],
   bootstrap: [AppComponent]

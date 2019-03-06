@@ -1,4 +1,5 @@
 <div class="col-md-6">
+  <button class="btn" (click)="createNew">Add picture</button>
   <table>
     <thead>
       <tr>
@@ -14,8 +15,8 @@
         <td>{{pic.Description}}</td>
         <td>img goes here</td>
         <td>
-          <button class="btn" click="editPicture(pic)">Edit</button>
-          <button class="btn danger" click="deletePicture(pic)">Edit</button>
+          <button class="btn" (click)="editPicture(pic)">Edit</button>
+          <button class="btn danger" (click)="deletePicture(pic)">Edit</button>
         </td>
       </tr>
     </tbody>
