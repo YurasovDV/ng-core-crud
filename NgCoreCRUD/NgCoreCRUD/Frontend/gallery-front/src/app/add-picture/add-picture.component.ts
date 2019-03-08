@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoriesService } from '../services/categories.service'
-import { PicturesService } from '../services/pictures.service'
+import { CategoriesService } from '../services/categories.service';
+import { PicturesService } from '../services/pictures.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Picturevm } from '../model/picturevm';
 import { Category } from '../model/category';
 
 @Component({
@@ -26,7 +25,10 @@ export class AddPictureComponent implements OnInit {
       description: ['', Validators.maxLength(200)],
       categoryId: [0, Validators.min(1)],
     });
+  }
 
+  back() {
+    this.router.navigate(['list-picture']);
   }
 
   onSubmit() {

@@ -1,21 +1,49 @@
-  <h2>Add picture</h2>
-  <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="">
-    <div class="col-md-4">
-      <div class="form-group">
-        <input class="form-control" type="text" id="description" name="description" formControlName="description" />
-      </div>
-      <div class="form-group">
-        <input class="form-control" type="file" id="file" name="file" />
-      </div>
-      <div class="form-group">
-        <select id="categoryId" name="categoryId" formControlName="categoryId" class="form-control">
-          <option *ngFor="let category of categoriesList" [value]="category.id">
-            {{category.description}}
-          </option>
-        </select>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-success" (click)="createNew()">Create</button>
-      </div>
+<div class="container">
+  <div class="row m-4">
+    <div class="col-12 text-centered">
+      <h2 class="m-2">Add picture</h2>
     </div>
+  </div>
+  <div class="row ml-5">
+    <div class="col-2">
+      <button class="btn btn-primary" (click)="back()">Back to list</button>
+    </div>
+  </div>
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit()" class="m-4">
+    <fieldset class="form-group">
+      <div class="row m-4">
+        <div class="col-2">
+          <label for="description">Description:</label>
+        </div>
+        <div class="col-9">
+          <input class="form-control" type="text" id="description" name="description" formControlName="description" />
+        </div>
+      </div>
+      <div class="row m-4">
+        <div class="col-2">
+          <label for="file">Select image file:</label>
+        </div>
+        <div class="col-9">
+          <input class="form-control-file" type="file" id="file" name="file" />
+        </div>
+      </div>
+      <div class="row m-4">
+        <div class="col-2">
+          <label for="categoryId">Select category:</label>
+        </div>
+        <div class="col-9">
+          <select id="categoryId" name="categoryId" formControlName="categoryId" class="form-control">
+            <option *ngFor="let category of categoriesList" [value]="category.id">
+              {{category.description}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="row m-4">
+        <div class="col-12 text-centered">
+          <button class="btn btn-success btn-lg" (click)="createNew()">Upload</button>
+        </div>
+      </div>
+    </fieldset>
   </form>
+</div>
