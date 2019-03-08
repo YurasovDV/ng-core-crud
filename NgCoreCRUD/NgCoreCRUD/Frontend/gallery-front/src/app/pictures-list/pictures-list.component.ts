@@ -14,7 +14,9 @@ export class PicturesListComponent implements OnInit {
 
   @Output() editEvent = new EventEmitter<Number>();
 
-  constructor(private picService: PicturesService, private router: Router) { }
+  constructor(private picService: PicturesService, private router: Router) {
+    this.pictures = [];
+  }
 
   ngOnInit() {
     this.picService.getAll().subscribe(data => this.pictures = data);

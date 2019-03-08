@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -6,77 +7,128 @@ namespace NgCoreCRUD.Model.Services
 {
     internal class GalleryServiceFake : IGalleryService
     {
-        public List<CategoryDto> Cats { get; set; }
-        public List<GalleryItemDto> Pics { get; set; }
+        private byte[] value;
+
+        public Dictionary<int, CategoryDto> Categories { get; set; }
+        public List<GalleryItemDto> Pictures { get; set; }
+        public Dictionary<int, byte[]> PicturesData { get; private set; }
 
         public GalleryServiceFake()
         {
-            this.Cats = new List<CategoryDto>()
+            Categories = new Dictionary<int, CategoryDto>()
             {
-                new CategoryDto()
                 {
-                    Description = "cat1",
-                    ID = 1
-                }
-            };
-
-            this.Pics = new List<GalleryItemDto>()
-            {
-                new GalleryItemDto()
-                {
-                    CategoryId = Cats.FirstOrDefault().ID,
-                    ID = 1,
-                    Description = "des1111"
+                    1,
+                    new CategoryDto()
+                    {
+                        Description = "Landscapes",
+                        ID = 1
+                    }
                 },
-                new GalleryItemDto()
                 {
-                    ID = 2,
-                    CategoryId = Cats.First().ID,
-                    Description = "des2222"
-                }
+                    2,
+                    new CategoryDto()
+                    {
+                        Description = "Cars",
+                        ID = 2
+                    }
+                },
+                {
+                    3,
+                    new CategoryDto()
+                    {
+                        Description = "Space",
+                        ID = 3
+                    }
+                },
             };
-        }
 
+            Pictures = new List<GalleryItemDto>();
+
+            PicturesData = new Dictionary<int, byte[]>();
+        }
 
 
         public Task<int> Create(GalleryItemDto value, byte[] image)
         {
-            throw new System.NotImplementedException();
+            value.ID = Pictures.Count + 1;
+            Pictures.Add(value);
+            PicturesData.Add(value.ID, image);
+            return Task.FromResult(value.ID);
         }
 
         public Task<bool> Delete(int id)
         {
-            throw new System.NotImplementedException();
-        }
+            int removed = Pictures.RemoveAll(p => p.ID == id);
+            if (removed != 0)
+            {
+                return Task.FromResult(false);
+            }
 
-        public Task Edit(GalleryItemDto value)
-        {
-            throw new System.NotImplementedException();
+            return Task.FromResult(true);
         }
 
         public IAsyncEnumerable<GalleryItemDto> GetAll()
         {
-            return Pics.ToAsyncEnumerable();
+            foreach (var pic in Pictures)
+            {
+                pic.CategoryName = Categories[pic.CategoryId].Description;
+            }
+
+            return Pictures.ToAsyncEnumerable();
         }
+
 
         public Task<GalleryItemDto> GetById(int id)
         {
-            return Task.FromResult(Pics.FirstOrDefault(p => p.ID == id));
-        }
-
-        public IAsyncEnumerable<CategoryDto> GetCategories()
-        {
-            return Cats.ToAsyncEnumerable();
-        }
-
-        public Task<CategoryDto> GetCategory(int id)
-        {
-            return Task.FromResult(Cats.FirstOrDefault(c => c.ID == id));
+            var res = Pictures.FirstOrDefault(p => p.ID == id);
+            if (res != null)
+            {
+                res.CategoryName = Categories[res.CategoryId].Description;
+            }
+            return Task.FromResult(res);
         }
 
         public Task<byte[]> GetImage(int id)
         {
-            throw new System.NotImplementedException();
+            byte[] value;
+            PicturesData.TryGetValue(id, out value);
+            if (value != null)
+            {
+                return Task.FromResult(value);
+            }
+            throw new Exception("image not found");
         }
+
+        public Task Edit(GalleryItemDto value)
+        {
+            var updated = value ?? throw new ArgumentNullException(nameof(value));
+            var old = Pictures.FirstOrDefault(p => p.ID == value.ID);
+            if (old == null)
+            {
+                throw new Exception($"image not found: id = {value.ID}");
+            }
+
+            Pictures.Remove(old);
+            Pictures.Add(value);
+
+            return Task.CompletedTask;
+        }
+
+        #region categories
+
+
+        public IAsyncEnumerable<CategoryDto> GetCategories()
+        {
+            return Categories.Values.ToAsyncEnumerable();
+        }
+
+        public Task<CategoryDto> GetCategory(int id)
+        {
+            return Task.FromResult(Categories[id]);
+        }
+
+
+        #endregion
     }
 }

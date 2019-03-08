@@ -5,33 +5,38 @@
     </div>
   </div>
   <div class="row m-2">
-    <div class="col-2">
-      <button class="btn btn-success" (click)="createNew()">Add picture</button>
+    <div class="col-2" >
+      <button class="btn btn-success textCentered" (click)="createNew()">Add picture</button>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <table class="table table-striped table-bordered">
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Preview</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let pic of pictures">
-            <td>{{pic.description}}</td>
-            <td>{{pic.categoryName}}</td>
-            <td><!--<img src="{{pic.url}}" />--></td>
-            <td>
-              <button class="btn btn-primary" style="margin: 5px;" (click)="editPicture(pic)">Edit</button>
-              <button class="btn btn-danger" style="margin: 5px;" (click)="deletePicture(pic)">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div *ngIf="pictures.length > 0">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Preview</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pic of pictures">
+              <td>{{pic.description}}</td>
+              <td>{{pic.categoryName}}</td>
+              <td><!--<img src="{{pic.url}}" />--></td>
+              <td>
+                <button class="btn btn-primary" style="margin: 5px;" (click)="editPicture(pic)">Edit</button>
+                <button class="btn btn-danger" style="margin: 5px;" (click)="deletePicture(pic)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-centered warning" *ngIf="pictures.length == 0">
+        no wallpapers so far...
+      </div>
+      </div>
     </div>
-  </div>
 </div>
