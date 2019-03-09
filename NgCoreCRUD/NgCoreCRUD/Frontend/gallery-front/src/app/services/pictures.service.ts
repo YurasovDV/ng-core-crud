@@ -32,8 +32,8 @@ export class PicturesService {
     return this.httpClient.get<Picturevm>(this.apiUrl + '/' + id);
   }
 
-  public create(picturevm: Picturevm) {
-    return this.httpClient.post(this.apiUrl, picturevm);
+  public create(form: FormData) {
+    return this.httpClient.post(this.apiUrl, form);
   }
 
   public update(picturevm: Picturevm) {

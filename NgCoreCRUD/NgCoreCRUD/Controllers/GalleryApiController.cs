@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NgCoreCRUD.Model;
 using NgCoreCRUD.Model.Services;
 
 namespace NgCoreCRUD.Controllers
 {
     [Route("api/v1/galleryitem")]
-    [ApiController]
+    // [ApiController] if present, file is skipped during model binding
     public class GalleryApiController : BaseController
     {
         public GalleryApiController(IGalleryService service) : base(service) { }
@@ -19,32 +18,62 @@ namespace NgCoreCRUD.Controllers
         [HttpGet]
         public IAsyncEnumerable<GalleryItemDto> Get()
         {
-            return _galleryService.GetAll();
+            var data = _galleryService.GetAll().Select(img => new GalleryItemDto(img));
+            return data;
         }
 
         [HttpGet("{id}")]
         public async Task<GalleryItemDto> Get(int id)
         {
             var result = await _galleryService.GetById(id);
-            return result;
+            var r1 = new GalleryItemDto(result);
+            return r1;
         }
 
         [HttpPost]
-        public async void Post([FromBody] GalleryItemDto value)
+        public async Task<IActionResult> Post(GalleryItemDto imageDto)
         {
-            var provider = new MultipartMemoryStreamProvider();
-            IFormFile imageFile = Request.Form.Files.FirstOrDefault();
-            using (MemoryStream to = new MemoryStream())
+            var imageFile = imageDto.File;
+            if (imageFile != null)
             {
-                imageFile.CopyTo(to);
-                await _galleryService.Create(value, to.GetBuffer());
+                using (MemoryStream to = new MemoryStream())
+                {
+                    imageFile.CopyTo(to);
+                    var entity = new GalleryItem()
+                    {
+                        CategoryId = imageDto.CategoryId,
+                        Description = imageDto.Description,
+                        ID = imageDto.ID.Value
+                    };
+                    await _galleryService.Create(entity, to.GetBuffer());
+                    return Ok();
+                }
+            }
+            else
+            {
+                return BadRequest("file is not attached");
             }
         }
 
         [HttpPut("{id}")]
-        public async void Put(int id, [FromBody] GalleryItemDto value)
+        public async Task<IActionResult> Put(int id, [FromBody] GalleryItemDto value)
         {
-            await _galleryService.Edit(value);
+            try
+            {
+                var entity = new GalleryItem()
+                {
+                    CategoryId = value.CategoryId,
+                    Description = value.Description,
+                    ID = value.ID.Value
+                };
+                await _galleryService.Edit(entity);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.Write($"image id = {value.ID.Value} not found: {ex.Message}");
+                return new StatusCodeResult((int)System.Net.HttpStatusCode.InternalServerError);
+            }
         }
 
         [HttpDelete("{id}")]
@@ -69,7 +98,7 @@ namespace NgCoreCRUD.Controllers
             {
                 return NotFound();
             }
-            return File(data, "image");
+            return File(data, "image/png");
         }
     }
 }

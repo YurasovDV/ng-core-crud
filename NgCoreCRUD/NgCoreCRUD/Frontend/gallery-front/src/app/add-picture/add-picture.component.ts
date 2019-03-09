@@ -14,6 +14,7 @@ export class AddPictureComponent implements OnInit {
 
   addForm: FormGroup;
   categoriesList: Category[];
+  fileSelected: File;
 
   constructor(private formBuilder: FormBuilder, private picturesService: PicturesService, private categoriesService: CategoriesService, private router: Router) { }
 
@@ -21,9 +22,9 @@ export class AddPictureComponent implements OnInit {
     this.categoriesService.getAll().subscribe(data => { this.categoriesList = data; });
 
     this.addForm = this.formBuilder.group({
-      id: [],
       description: ['', Validators.maxLength(200)],
       categoryId: [0, Validators.min(1)],
+      file: [null, Validators.required]
     });
   }
 
@@ -31,7 +32,15 @@ export class AddPictureComponent implements OnInit {
     this.router.navigate(['list-picture']);
   }
 
+  changeFile(event) {
+    this.fileSelected = event.target.files[0];
+  }
+
   onSubmit() {
-    this.picturesService.create(this.addForm.value).subscribe(data => { this.router.navigate(['list-picture']); });
+    let form: FormData = new FormData();
+    form.append('description', this.addForm.get('description').value);
+    form.append('categoryId', this.addForm.get('categoryId').value);
+    form.append('file', this.fileSelected);
+    this.picturesService.create(form).subscribe(data => { this.router.navigate(['list-picture']); }, err => { console.log(err); });
   }
 }

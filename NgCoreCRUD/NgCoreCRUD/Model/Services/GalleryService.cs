@@ -15,18 +15,18 @@ namespace NgCoreCRUD.Model.Services
             _context = context;
         }
 
-        public IAsyncEnumerable<GalleryItemDto> GetAll()
+        public IAsyncEnumerable<GalleryItem> GetAll()
         {
-            return _context.Pictures.ToAsyncEnumerable().Select(i => new GalleryItemDto(i));
+            return _context.Pictures.ToAsyncEnumerable();
         }
 
-        public async Task<GalleryItemDto> GetById(int id)
+        public async Task<GalleryItem> GetById(int id)
         {
             var res = await _context.Pictures.FindAsync(id);
-            return res == null ? null : new GalleryItemDto(res);
+            return res;
         }
 
-        public async Task<int> Create(GalleryItemDto value, byte[] image)
+        public async Task<int> Create(GalleryItem value, byte[] image)
         {
             var picture = new GalleryItem()
             {
@@ -39,9 +39,13 @@ namespace NgCoreCRUD.Model.Services
             return picture.ID;
         }
 
-        public async Task Edit(GalleryItemDto value)
+        public async Task Edit(GalleryItem value)
         {
             var old = await _context.Pictures.FindAsync(value.ID);
+            if (old == null)
+            {
+                throw new Exception();
+            }
             old.CategoryId = value.CategoryId;
             old.Description = value.Description;
             _context.Pictures.Update(old);
@@ -73,17 +77,17 @@ namespace NgCoreCRUD.Model.Services
             return null;
         }
 
-        public IAsyncEnumerable<CategoryDto> GetCategories()
+        public IAsyncEnumerable<Category> GetCategories()
         {
-            return _context.Categories.ToAsyncEnumerable().Select(c => new CategoryDto() { ID = c.CategoryId, Description = c.Name });
+            return _context.Categories.ToAsyncEnumerable();
         }
 
-        public async Task<CategoryDto> GetCategory(int id)
+        public async Task<Category> GetCategory(int id)
         {
             var res = await _context.Categories.FindAsync(id);
             if (res != null)
             {
-                return new CategoryDto() { ID = res.CategoryId, Description = res.Name };
+                return res;
             }
             return null;
         }

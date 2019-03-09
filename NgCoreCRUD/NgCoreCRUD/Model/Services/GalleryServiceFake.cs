@@ -7,92 +7,93 @@ namespace NgCoreCRUD.Model.Services
 {
     internal class GalleryServiceFake : IGalleryService
     {
-        private byte[] value;
-
-        public Dictionary<int, CategoryDto> Categories { get; set; }
-        public List<GalleryItemDto> Pictures { get; set; }
-        public Dictionary<int, byte[]> PicturesData { get; private set; }
+        public Dictionary<int, Category> Categories { get; set; }
+        public List<GalleryItem> Pictures { get; set; }
 
         public GalleryServiceFake()
         {
-            Categories = new Dictionary<int, CategoryDto>()
+            Categories = new Dictionary<int, Category>()
             {
                 {
                     1,
-                    new CategoryDto()
+                    new Category()
                     {
-                        Description = "Landscapes",
-                        ID = 1
+                        Name = "Landscapes",
+                        CategoryId = 1,
+                        Pictures = new List<GalleryItem>()
                     }
                 },
                 {
                     2,
-                    new CategoryDto()
+                    new Category()
                     {
-                        Description = "Cars",
-                        ID = 2
+                        Name = "Cars",
+                        CategoryId = 2,
+                        Pictures = new List<GalleryItem>()
                     }
                 },
                 {
                     3,
-                    new CategoryDto()
+                    new Category()
                     {
-                        Description = "Space",
-                        ID = 3
+                        Name = "Space",
+                        CategoryId = 3,
+                        Pictures = new List<GalleryItem>()
                     }
                 },
             };
 
-            Pictures = new List<GalleryItemDto>();
-
-            PicturesData = new Dictionary<int, byte[]>();
+            Pictures = new List<GalleryItem>();
         }
 
 
-        public Task<int> Create(GalleryItemDto value, byte[] image)
+        public Task<int> Create(GalleryItem picture, byte[] image)
         {
-            value.ID = Pictures.Count + 1;
-            Pictures.Add(value);
-            PicturesData.Add(value.ID, image);
-            return Task.FromResult(value.ID);
+            picture.ID = Pictures.Count + 1;
+            var category = Categories[picture.CategoryId];
+
+            var added = new GalleryItem()
+            {
+                CategoryId = picture.CategoryId,
+                Category = category,
+                Description = picture.Description,
+                Image = image,
+                ID = picture.ID
+            };
+
+            category.Pictures.Add(added);
+
+            Pictures.Add(added);
+            return Task.FromResult(added.ID);
         }
 
         public Task<bool> Delete(int id)
         {
-            int removed = Pictures.RemoveAll(p => p.ID == id);
-            if (removed != 0)
+            var toDelete = Pictures.FirstOrDefault(p => p.ID == id);
+            if (toDelete != null)
             {
-                return Task.FromResult(false);
+                toDelete.Category.Pictures.Remove(toDelete);
+                return Task.FromResult(true);
             }
 
-            return Task.FromResult(true);
+            return Task.FromResult(false);
         }
 
-        public IAsyncEnumerable<GalleryItemDto> GetAll()
+        public IAsyncEnumerable<GalleryItem> GetAll()
         {
-            foreach (var pic in Pictures)
-            {
-                pic.CategoryName = Categories[pic.CategoryId].Description;
-            }
-
             return Pictures.ToAsyncEnumerable();
         }
 
-
-        public Task<GalleryItemDto> GetById(int id)
+        public Task<GalleryItem> GetById(int id)
         {
             var res = Pictures.FirstOrDefault(p => p.ID == id);
-            if (res != null)
-            {
-                res.CategoryName = Categories[res.CategoryId].Description;
-            }
             return Task.FromResult(res);
         }
 
         public Task<byte[]> GetImage(int id)
         {
             byte[] value;
-            PicturesData.TryGetValue(id, out value);
+            value = Pictures.FirstOrDefault(p => p.ID == id)?.Image;
             if (value != null)
             {
                 return Task.FromResult(value);
@@ -100,17 +101,25 @@ namespace NgCoreCRUD.Model.Services
             throw new Exception("image not found");
         }
 
-        public Task Edit(GalleryItemDto value)
+        public Task Edit(GalleryItem value)
         {
             var updated = value ?? throw new ArgumentNullException(nameof(value));
-            var old = Pictures.FirstOrDefault(p => p.ID == value.ID);
-            if (old == null)
+            var toUpdate = Pictures.FirstOrDefault(p => p.ID == value.ID);
+            if (toUpdate == null)
             {
                 throw new Exception($"image not found: id = {value.ID}");
             }
 
-            Pictures.Remove(old);
-            Pictures.Add(value);
+            toUpdate.Description = value.Description;
+
+            if (toUpdate.CategoryId != value.CategoryId)
+            {
+                var oldCategoryId = toUpdate.CategoryId;
+                toUpdate.Category.Pictures.Remove(toUpdate);
+                toUpdate.CategoryId = value.CategoryId;
+                toUpdate.Category = Categories[value.CategoryId];
+                toUpdate.Category.Pictures.Add(toUpdate);
+            }
 
             return Task.CompletedTask;
         }
@@ -118,12 +127,12 @@ namespace NgCoreCRUD.Model.Services
         #region categories
 
 
-        public IAsyncEnumerable<CategoryDto> GetCategories()
+        public IAsyncEnumerable<Category> GetCategories()
         {
             return Categories.Values.ToAsyncEnumerable();
         }
 
-        public Task<CategoryDto> GetCategory(int id)
+        public Task<Category> GetCategory(int id)
         {
             return Task.FromResult(Categories[id]);
         }

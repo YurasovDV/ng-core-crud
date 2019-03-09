@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NgCoreCRUD.Model.Services;
 
@@ -17,17 +15,23 @@ namespace NgCoreCRUD.Controllers
         [HttpGet]
         public IAsyncEnumerable<CategoryDto> Get()
         {
-            return _galleryService.GetCategories();
+            return _galleryService.GetCategories().Select(cat => new CategoryDto() { ID = cat.CategoryId, Description = cat.Name });
         }
 
         [HttpGet("{id}")]
         public async Task<CategoryDto> Get(int id)
         {
-            var result = await _galleryService.GetCategory(id);
+            CategoryDto result = null;
+            var categoryEntity = await _galleryService.GetCategory(id);
+            if (categoryEntity != null)
+            {
+                result = new CategoryDto()
+                {
+                    ID = categoryEntity.CategoryId,
+                    Description = categoryEntity.Name
+                };
+            }
             return result;
         }
-
-       
-
     }
 }

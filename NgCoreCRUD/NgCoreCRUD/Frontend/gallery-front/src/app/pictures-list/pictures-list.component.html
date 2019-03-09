@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="row m-2">
-    <div class="col-2" >
+    <div class="col-4" >
       <button class="btn btn-success textCentered" (click)="createNew()">Add picture</button>
     </div>
   </div>
@@ -23,12 +23,12 @@
           </thead>
           <tbody>
             <tr *ngFor="let pic of pictures">
-              <td>{{pic.description}}</td>
-              <td>{{pic.categoryName}}</td>
-              <td><!--<img src="{{pic.url}}" />--></td>
-              <td>
-                <button class="btn btn-primary" style="margin: 5px;" (click)="editPicture(pic)">Edit</button>
-                <button class="btn btn-danger" style="margin: 5px;" (click)="deletePicture(pic)">Delete</button>
+              <td class="text-centered">{{pic.description}}</td>
+              <td class="text-centered">{{pic.categoryName}}</td>
+              <td class="text-centered"><img width="80" height="80" src="{{pic.url}}" /></td>
+              <td class="text-centered">
+                <button class="btn btn-primary m-1" (click)="editPicture(pic)">Edit</button>
+                <button class="btn btn-danger m-1" (click)="deletePicture(pic)">Delete</button>
               </td>
             </tr>
           </tbody>
