@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace NgCoreCRUD.Model.Services
+﻿namespace NgCoreCRUD.Model.Services
 {
     public class CategoryDto
     {

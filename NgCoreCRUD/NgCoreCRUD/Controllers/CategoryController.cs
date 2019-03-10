@@ -13,9 +13,11 @@ namespace NgCoreCRUD.Controllers
         public CategoryController(IGalleryService service) : base(service) { }
 
         [HttpGet]
-        public IAsyncEnumerable<CategoryDto> Get()
+        public IEnumerable<CategoryDto> Get()
         {
-            return _galleryService.GetCategories().Select(cat => new CategoryDto() { ID = cat.CategoryId, Description = cat.Name });
+            var categories = _galleryService.GetCategories();
+            IEnumerable<CategoryDto> categories2 = categories.Select(cat => new CategoryDto() { ID = cat.CategoryId, Description = cat.Name });
+            return categories2;
         }
 
         [HttpGet("{id}")]

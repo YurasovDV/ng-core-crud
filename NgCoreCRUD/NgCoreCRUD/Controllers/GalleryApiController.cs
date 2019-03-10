@@ -16,7 +16,7 @@ namespace NgCoreCRUD.Controllers
         public GalleryApiController(IGalleryService service) : base(service) { }
 
         [HttpGet]
-        public IAsyncEnumerable<GalleryItemDto> Get()
+        public IEnumerable<GalleryItemDto> Get()
         {
             var data = _galleryService.GetAll().Select(img => new GalleryItemDto(img));
             return data;
@@ -43,7 +43,6 @@ namespace NgCoreCRUD.Controllers
                     {
                         CategoryId = imageDto.CategoryId,
                         Description = imageDto.Description,
-                        ID = imageDto.ID.Value
                     };
                     await _galleryService.Create(entity, to.GetBuffer());
                     return Ok();

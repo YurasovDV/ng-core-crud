@@ -6,11 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Simple Gallery';
-  public pictureBeingEditId: Number = null;
-
-  public onPictureEditChange($event) {
-    this.pictureBeingEditId = $event;
-  }
+  private title = 'Simple Gallery';
 
 }

@@ -15,9 +15,9 @@ namespace NgCoreCRUD.Model.Services
             _context = context;
         }
 
-        public IAsyncEnumerable<GalleryItem> GetAll()
+        public IEnumerable<GalleryItem> GetAll()
         {
-            return _context.Pictures.ToAsyncEnumerable();
+            return _context.Pictures.AsEnumerable();
         }
 
         public async Task<GalleryItem> GetById(int id)
@@ -77,9 +77,9 @@ namespace NgCoreCRUD.Model.Services
             return null;
         }
 
-        public IAsyncEnumerable<Category> GetCategories()
+        public IEnumerable<Category> GetCategories()
         {
-            return _context.Categories.ToAsyncEnumerable();
+            return _context.Categories.AsEnumerable();
         }
 
         public async Task<Category> GetCategory(int id)

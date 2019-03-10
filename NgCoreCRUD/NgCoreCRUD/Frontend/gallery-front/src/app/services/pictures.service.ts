@@ -29,7 +29,14 @@ export class PicturesService {
   }
 
   public getPicture(id: Number): Observable<Picturevm> {
-    return this.httpClient.get<Picturevm>(this.apiUrl + '/' + id);
+
+    var mapper = map((data: Picturevm) => {
+      data.url = this.apiUrl + '/GetImage/' + data.id;
+
+      return data;
+    });
+
+    return mapper(this.httpClient.get<Picturevm>(this.apiUrl + '/' + id));
   }
 
   public create(form: FormData) {

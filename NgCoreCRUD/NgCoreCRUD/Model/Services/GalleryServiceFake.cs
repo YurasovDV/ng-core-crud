@@ -79,9 +79,9 @@ namespace NgCoreCRUD.Model.Services
             return Task.FromResult(false);
         }
 
-        public IAsyncEnumerable<GalleryItem> GetAll()
+        public IEnumerable<GalleryItem> GetAll()
         {
-            return Pictures.ToAsyncEnumerable();
+            return Pictures.AsEnumerable();
         }
 
         public Task<GalleryItem> GetById(int id)
@@ -127,9 +127,9 @@ namespace NgCoreCRUD.Model.Services
         #region categories
 
 
-        public IAsyncEnumerable<Category> GetCategories()
+        public IEnumerable<Category> GetCategories()
         {
-            return Categories.Values.ToAsyncEnumerable();
+            return Categories.Values.AsEnumerable();
         }
 
         public Task<Category> GetCategory(int id)

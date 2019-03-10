@@ -16,12 +16,21 @@
           <label for="description">Description:</label>
         </div>
         <div class="col-9">
+          <input type="hidden" id="id" name="id" formControlName="id"  />
           <input class="form-control" type="text" id="description" name="description" formControlName="description" />
         </div>
       </div>
       <div class="row m-4">
         <div class="col-2">
-          <label for="categoryId">Select category:</label>
+          <label>Image:</label>
+        </div>
+        <div class="col-9" *ngIf="pictureVm.url != null">
+          <img [src]="pictureVm.url" width="100" height="100" />
+        </div>
+      </div>
+      <div class="row m-4">
+        <div class="col-2">
+          <label for="categoryId">Category:</label>
         </div>
         <div class="col-9">
           <select id="categoryId" name="categoryId" formControlName="categoryId" class="form-control">
@@ -33,7 +42,7 @@
       </div>
       <div class="row m-4">
         <div class="col-12 text-centered">
-          <button class="btn btn-success" (click)="createNew()">Create</button>
+          <button class="btn btn-success btn-lg">Save changes</button>
         </div>
       </div>
     </fieldset>

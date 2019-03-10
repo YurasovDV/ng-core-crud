@@ -5,7 +5,7 @@ import { AddPictureComponent } from './add-picture/add-picture.component';
 
 const routes: Route[] = [
   { path: 'list-picture', component: PicturesListComponent },
-  { path: 'edit-picture', component: EditPictureComponent },
+  { path: 'edit-picture/:id', component: EditPictureComponent },
   { path: 'add-picture', component: AddPictureComponent },
   { path: '', component: PicturesListComponent }
 ];

@@ -8,12 +8,12 @@ namespace NgCoreCRUD.Model.Services
         Task<int> Create(GalleryItem value, byte[] image);
         Task<bool> Delete(int id);
         Task Edit(GalleryItem value);
-        IAsyncEnumerable<GalleryItem> GetAll();
+        IEnumerable<GalleryItem> GetAll();
         Task<GalleryItem> GetById(int id);
 
         Task<byte[]> GetImage(int id);
 
-        IAsyncEnumerable<Category> GetCategories();
+        IEnumerable<Category> GetCategories();
         Task<Category> GetCategory(int id);
     }
 }
