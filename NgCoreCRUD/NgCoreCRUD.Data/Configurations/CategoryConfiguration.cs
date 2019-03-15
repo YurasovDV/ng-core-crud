@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NgCoreCRUD.Model;
+using NgCoreCRUD.Entities;
 
-namespace NgCoreCRUD.DAL.Configurations
+namespace NgCoreCRUD.Data.Configurations
 {
     public class CategoryConfiguration : IEntityTypeConfiguration<Category>
     {

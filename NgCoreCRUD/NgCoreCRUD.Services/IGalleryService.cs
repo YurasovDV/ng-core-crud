@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using NgCoreCRUD.Entities;
 
 namespace NgCoreCRUD.Model.Services
 {

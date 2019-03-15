@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using NgCoreCRUD.DAL;
+using NgCoreCRUD.IoC;
 using NgCoreCRUD.Model.Services;
 
 namespace NgCoreCRUD
@@ -28,13 +28,7 @@ namespace NgCoreCRUD
 
         public void ConfigureServices(IServiceCollection services)
         {
-
-            Action<InMemoryDbContextOptionsBuilder> c = ax => { };
-            services.AddDbContext<GalleryDbContext>(opt => opt.UseInMemoryDatabase("GalleryDb", c));
-            services.Add(new ServiceDescriptor(typeof(IGalleryService), typeof(GalleryServiceFake), ServiceLifetime.Singleton));
-
-            //services.AddDbContext<GalleryDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("GalleryDB"), options => options.CommandTimeout(120)));
-            //services.Add(new ServiceDescriptor(typeof(IGalleryService), typeof(GalleryService), ServiceLifetime.Scoped));
+            Config.Bind(services, Configuration);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 

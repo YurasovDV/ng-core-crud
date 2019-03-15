@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NgCoreCRUD.Migrations
+namespace NgCoreCRUD.Data.Migrations
 {
-    public partial class InitialState : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,7 +32,7 @@ namespace NgCoreCRUD.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Image = table.Column<byte[]>(nullable: true),
+                    Image = table.Column<byte[]>(type: "image", nullable: true),
                     Description = table.Column<string>(maxLength: 140, nullable: true),
                     CategoryId = table.Column<int>(nullable: false)
                 },

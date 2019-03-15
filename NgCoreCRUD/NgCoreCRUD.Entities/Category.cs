@@ -1,15 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace NgCoreCRUD.Model
+namespace NgCoreCRUD.Entities
 {
     public class Category
     {
-        public Category()
-        {
-            
-        }
-
         public int CategoryId { get; set; }
 
         [MaxLength(40, ErrorMessage = "Category name must be 40 symbols or less")]

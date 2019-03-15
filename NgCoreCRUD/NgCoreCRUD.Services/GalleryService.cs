@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NgCoreCRUD.DAL;
+using NgCoreCRUD.Data;
+using NgCoreCRUD.Entities;
 
 namespace NgCoreCRUD.Model.Services
 {

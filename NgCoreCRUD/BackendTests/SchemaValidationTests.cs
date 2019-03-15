@@ -1,8 +1,8 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NgCoreCRUD.DAL;
-using NgCoreCRUD.Model;
+using NgCoreCRUD.Data;
+using NgCoreCRUD.Entities;
 
 namespace BackendTests
 {

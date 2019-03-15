@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using NgCoreCRUD.Entities;
 
 namespace NgCoreCRUD.Model.Services
 {

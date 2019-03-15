@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using NgCoreCRUD.Entities;
 
 namespace NgCoreCRUD.Model.Services
 {
-    internal class GalleryServiceFake : IGalleryService
+    public class GalleryServiceFake : IGalleryService
     {
         public Dictionary<int, Category> Categories { get; set; }
         public List<GalleryItem> Pictures { get; set; }

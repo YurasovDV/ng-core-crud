@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NgCoreCRUD.Model
+namespace NgCoreCRUD.Entities
 {
     public class GalleryItem
     {
@@ -10,7 +10,6 @@ namespace NgCoreCRUD.Model
 
         [MaxLength(140, ErrorMessage = "Description must be 140 symbols or less")]
         public string Description { get; set; }
-
 
 
         public Category Category { get; set; }

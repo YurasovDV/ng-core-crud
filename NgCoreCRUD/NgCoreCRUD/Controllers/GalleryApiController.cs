@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using NgCoreCRUD.Entities;
 using NgCoreCRUD.Model;
 using NgCoreCRUD.Model.Services;
 

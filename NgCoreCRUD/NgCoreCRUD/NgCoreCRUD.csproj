@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.0-preview3-35497" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
   </ItemGroup>
@@ -31,6 +30,12 @@
 
   <ItemGroup>
     <Content Include="Frontend\gallery-front\tsconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NgCoreCRUD.Entities\NgCoreCRUD.Entities.csproj" />
+    <ProjectReference Include="..\NgCoreCRUD.IoC\NgCoreCRUD.IoC.csproj" />
+    <ProjectReference Include="..\NgCoreCRUD.Services\NgCoreCRUD.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using NgCoreCRUD.DAL.Configurations;
-using NgCoreCRUD.Model;
+﻿using Microsoft.EntityFrameworkCore;
+using NgCoreCRUD.Data.Configurations;
+using NgCoreCRUD.Entities;
 
-namespace NgCoreCRUD.DAL
+namespace NgCoreCRUD.Data
 {
     public class GalleryDbContext : DbContext
     {

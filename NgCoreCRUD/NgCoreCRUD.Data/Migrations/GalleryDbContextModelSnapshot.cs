@@ -3,25 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NgCoreCRUD.DAL;
+using NgCoreCRUD.Data;
 
-namespace NgCoreCRUD.Migrations
+namespace NgCoreCRUD.Data.Migrations
 {
     [DbContext(typeof(GalleryDbContext))]
-    [Migration("20190306172902_ChangedToImage")]
-    partial class ChangedToImage
+    partial class GalleryDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.0-preview2-35157")
+                .HasAnnotation("ProductVersion", "2.2.0-preview3-35497")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("NgCoreCRUD.Model.Category", b =>
+            modelBuilder.Entity("NgCoreCRUD.Entities.Category", b =>
                 {
                     b.Property<int>("CategoryId")
                         .ValueGeneratedOnAdd()
@@ -35,7 +33,7 @@ namespace NgCoreCRUD.Migrations
                     b.ToTable("Categories","dbo");
                 });
 
-            modelBuilder.Entity("NgCoreCRUD.Model.GalleryItem", b =>
+            modelBuilder.Entity("NgCoreCRUD.Entities.GalleryItem", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -56,9 +54,9 @@ namespace NgCoreCRUD.Migrations
                     b.ToTable("Pictures","dbo");
                 });
 
-            modelBuilder.Entity("NgCoreCRUD.Model.GalleryItem", b =>
+            modelBuilder.Entity("NgCoreCRUD.Entities.GalleryItem", b =>
                 {
-                    b.HasOne("NgCoreCRUD.Model.Category", "Category")
+                    b.HasOne("NgCoreCRUD.Entities.Category", "Category")
                         .WithMany("Pictures")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
