@@ -54,8 +54,8 @@ namespace NgCoreCRUD.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] GalleryItemDto value)
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] GalleryItemDto value)
         {
             try
             {

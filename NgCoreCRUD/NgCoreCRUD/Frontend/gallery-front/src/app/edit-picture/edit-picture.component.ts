@@ -48,6 +48,6 @@ export class EditPictureComponent implements OnInit {
   }
 
   onSubmit() {
-    this.picturesService.create(this.editForm.value).subscribe(data => { this.router.navigate(['list-picture']); });
+    this.picturesService.update(this.editForm.value).subscribe(data => { this.router.navigate(['list-picture']); });
   }
 }

@@ -43,8 +43,8 @@ export class PicturesService {
     return this.httpClient.post(this.apiUrl, form);
   }
 
-  public update(picturevm: Picturevm) {
-    return this.httpClient.put(this.apiUrl, picturevm);
+  public update(form: FormData) {
+    return this.httpClient.put(this.apiUrl, form);
   }
 
   public deletePicture(id: Number) {
