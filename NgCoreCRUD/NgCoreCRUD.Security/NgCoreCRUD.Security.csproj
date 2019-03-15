@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NgCoreCRUD.Data\NgCoreCRUD.Data.csproj" />
+    <ProjectReference Include="..\NgCoreCRUD.Entities\NgCoreCRUD.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

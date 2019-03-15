@@ -7,13 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NgCoreCRUD", "NgCoreCRUD\Ng
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BackendTests", "BackendTests\BackendTests.csproj", "{50FB94D4-1CBC-4C4E-B71C-FBE6448E98ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgCoreCRUD.Data", "NgCoreCRUD.Data\NgCoreCRUD.Data.csproj", "{0239874A-1A9B-41CC-B3CD-18D86D8170CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NgCoreCRUD.Data", "NgCoreCRUD.Data\NgCoreCRUD.Data.csproj", "{0239874A-1A9B-41CC-B3CD-18D86D8170CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgCoreCRUD.Entities", "NgCoreCRUD.Entities\NgCoreCRUD.Entities.csproj", "{68A5A6B9-A8C8-4985-87E6-739D61449081}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NgCoreCRUD.Entities", "NgCoreCRUD.Entities\NgCoreCRUD.Entities.csproj", "{68A5A6B9-A8C8-4985-87E6-739D61449081}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgCoreCRUD.Services", "NgCoreCRUD.Services\NgCoreCRUD.Services.csproj", "{04D1AA2D-C427-44E5-B4CE-568B780851D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NgCoreCRUD.Services", "NgCoreCRUD.Services\NgCoreCRUD.Services.csproj", "{04D1AA2D-C427-44E5-B4CE-568B780851D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgCoreCRUD.IoC", "NgCoreCRUD.IoC\NgCoreCRUD.IoC.csproj", "{55DFA05A-32F2-4E16-B69C-36F96814B02C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NgCoreCRUD.IoC", "NgCoreCRUD.IoC\NgCoreCRUD.IoC.csproj", "{55DFA05A-32F2-4E16-B69C-36F96814B02C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NgCoreCRUD.Security", "NgCoreCRUD.Security\NgCoreCRUD.Security.csproj", "{14EA72F4-FE30-46D0-ACDE-37186F44775A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{55DFA05A-32F2-4E16-B69C-36F96814B02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55DFA05A-32F2-4E16-B69C-36F96814B02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55DFA05A-32F2-4E16-B69C-36F96814B02C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14EA72F4-FE30-46D0-ACDE-37186F44775A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14EA72F4-FE30-46D0-ACDE-37186F44775A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14EA72F4-FE30-46D0-ACDE-37186F44775A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14EA72F4-FE30-46D0-ACDE-37186F44775A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
